@@ -62,13 +62,15 @@ return {
       lua_ls = {
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
+            runtime = { version = 'LuaJIT' },
             workspace = {
               checkThirdParty = false,
-              library = vim.api.nvim_get_runtime_file('', true),
+              library = {
+                '${3rd}/luv/library',
+                vim.api.nvim_get_runtime_file('', true),
+              },
             },
+            diagnostics = { disable = { 'missing-fields' }, globals = { 'vim', 'use', 'Snacks' } },
             format = {
               enable = false,
             },
