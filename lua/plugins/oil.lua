@@ -6,6 +6,7 @@ return {
     },
     keymaps = {
       ['<C-s>'] = false,
+      ['<C-c>'] = false,
     },
   },
   dependencies = { { 'echasnovski/mini.icons', opts = {} } },
