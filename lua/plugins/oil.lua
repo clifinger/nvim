@@ -6,6 +6,13 @@ return {
         view_options = {
             show_hidden = true,
         },
+        keymaps = {
+            ["<C-s>"] = false, -- Disable the default <C-s> mapping for horizontal split
+            -- You can disable other conflicting default maps here too if needed
+            -- ['<C-h>'] = false, -- Example: Disable horizontal split mapping (if it exists and conflicts)
+            -- ['<C-v>'] = false, -- Example: Disable vertical split mapping
+            -- ['<C-t>'] = false, -- Example: Disable tab split mapping
+        },
     },
     -- Optional dependencies
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
