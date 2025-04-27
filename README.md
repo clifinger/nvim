@@ -7,5 +7,5 @@ Credits to [jakobwesthoff/nvim-from-scratch](https://github.com/jakobwesthoff/nv
 
 ## TODO:
 
-- [x] separate all plugin configs into `.lua/config` folder
+- [ ] separate all plugin configs into `.lua/config` folder
 - [ ] Move the keymaps configured into `.lua/plugins/*` -> `./lua/config/keymaps.lua`
