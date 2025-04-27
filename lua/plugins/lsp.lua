@@ -10,10 +10,13 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        local buffer = event.buf
+
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
-          if event.buf and vim.api.nvim_buf_is_valid(event.buf) then
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          if buffer and vim.api.nvim_buf_is_valid(buffer) then
+            vim.keymap.set(mode, keys, func, { buffer = buffer, desc = 'LSP: ' .. desc })
           end
         end
 
@@ -21,7 +24,6 @@ return {
         map('gr', vim.lsp.buf.references, 'Goto References')
         map('gI', vim.lsp.buf.implementation, 'Goto Implementation')
         map('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
-
         map('<leader>cr', vim.lsp.buf.rename, 'Rename')
         map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
         map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
@@ -33,15 +35,15 @@ return {
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, 'Workspace List Folders')
 
-        if vim.bo[event.buf].filetype ~= 'markdown' and vim.lsp.buf.document_highlight then
+        if client and client.supports_method 'textDocument/documentHighlight' then
           local highlight_group = vim.api.nvim_create_augroup('lsp-highlight-symbols', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
+            buffer = buffer,
             group = highlight_group,
             callback = vim.lsp.buf.document_highlight,
           })
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
+            buffer = buffer,
             group = highlight_group,
             callback = vim.lsp.buf.clear_references,
           })
