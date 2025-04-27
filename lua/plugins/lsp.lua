@@ -94,6 +94,8 @@ return {
       'lua-language-server',
       'typescript-language-server',
       'tailwindcss-language-server',
+      'markdownlint-cli2',
+      'markdown-toc',
     }
     local unique_tools = {}
     for _, tool in ipairs(ensure_installed_tools) do
