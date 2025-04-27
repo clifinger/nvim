@@ -8,6 +8,9 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+-- AI & Copilot
+vim.keymap.set('n', '<leader>ua', '<cmd>CopilotChatToggle<cr>', { desc = 'Toggle Copilot Chat' })
+
 -- General & File Operations
 map('n', '-', '<cmd>Oil --float<CR>', 'File Explorer: Open Parent Directory (Oil)')
 map('n', '<C-s>', '<cmd>w<CR>', 'File: Save Current File')
