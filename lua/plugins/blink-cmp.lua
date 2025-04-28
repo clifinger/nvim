@@ -1,5 +1,25 @@
 return {
   {
+    'L3MON4D3/LuaSnip',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = 'v2.*',
+    build = 'make install_jsregexp',
+    config = function(_, opts)
+      require('luasnip').setup(opts)
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
+    opts = {
+      history = true,
+      delete_check_events = 'TextChanged',
+    },
+  },
+  {
+    'rafamadriz/friendly-snippets',
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
+  },
+  {
     'saghen/blink.compat',
     version = '*',
     lazy = true,
@@ -13,24 +33,32 @@ return {
       'ray-x/cmp-sql',
     },
 
-    -- use a release tag to download pre-built binaries
     version = '1.*',
 
     opts = {
+      snippets = {
+        preset = 'luasnip',
+      },
+
       keymap = {
-        preset = 'default',
-        ['<C-Z>'] = { 'accept', 'fallback' },
+        preset = 'enter',
       },
-
       appearance = {
-        nerd_font_variant = 'mono',
+        nerd_font_variant = 'normal',
+        use_nvim_cmp_as_default = false,
       },
 
-      completion = { documentation = { auto_show = true } },
+      completion = {
+        documentation = { auto_show = true },
+        accept = {
+          auto_brackets = { enabled = true },
+        },
+      },
       signature = { enabled = true },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji', 'sql' },
+
         providers = {
           emoji = {
             module = 'blink-emoji',

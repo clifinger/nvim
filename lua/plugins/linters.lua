@@ -8,8 +8,8 @@ return {
 
     lint.linters_by_ft = {
       elixir = { 'credo' },
-      typescript = { 'biome' },
-      javascript = { 'biome' },
+      typescript = { 'biomejs' },
+      javascript = { 'biomejs' },
     }
 
     -- Autocommand to run linting on specific events

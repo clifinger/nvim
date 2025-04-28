@@ -23,7 +23,6 @@ return {
             buffer = buffer,
             callback = function()
               vim.lsp.buf.code_action { context = { only = { 'source.addMissingImports.ts' } }, apply = true, bufnr = buffer }
-              vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true, bufnr = buffer }
             end,
           })
         end
@@ -110,8 +109,8 @@ return {
           end, 'File References')
 
           map('<leader>co', function()
-            vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
-          end, 'Organize Imports')
+            require('conform').format { bufnr = buffer }
+          end, 'Format (Conform)')
           map('<leader>cM', function()
             vim.lsp.buf.code_action { context = { only = { 'source.addMissingImports.ts' } }, apply = true }
           end, 'Add missing imports')
@@ -119,8 +118,8 @@ return {
             vim.lsp.buf.code_action { context = { only = { 'source.removeUnused.ts' } }, apply = true }
           end, 'Remove unused imports')
           map('<leader>cD', function()
-            vim.lsp.buf.code_action { context = { only = { 'source.fixAll.ts' } }, apply = true }
-          end, 'Fix all diagnostics')
+            require('conform').format { bufnr = buffer }
+          end, 'Format/Fix (Conform)')
           map('<leader>cV', function()
             client.request('workspace/executeCommand', { command = 'typescript.selectTypeScriptVersion' }, function(err, result)
               if err then
@@ -238,6 +237,34 @@ return {
           },
         },
       },
+      emmet_language_server = {
+        filetypes = {
+          'astro',
+          'css',
+          'eruby',
+          'html',
+          'javascript',
+          'javascriptreact',
+          'less',
+          'php',
+          'pug',
+          'sass',
+          'scss',
+          'typescriptreact',
+          'vue',
+          'heex',
+        },
+        init_options = {
+          excludeLanguages = {},
+          extensionsPath = {},
+          preferences = {},
+          showAbbreviationSuggestions = true,
+          showExpandedAbbreviation = 'always',
+          showSuggestionsAsSnippets = false,
+          syntaxProfiles = {},
+          variables = {},
+        },
+      },
     }
 
     local ensure_installed_tools = {
@@ -253,6 +280,7 @@ return {
       'markdownlint-cli2',
       'markdown-toc',
       'js-debug-adapter',
+      'emmet-language-server',
     }
     local unique_tools = {}
     for _, tool in ipairs(ensure_installed_tools) do
