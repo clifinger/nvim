@@ -12,7 +12,6 @@ map('i', 'jj', '<Esc>', 'Exit Insert Mode with jj')
 map('i', 'jk', '<Esc>', 'Exit Insert Mode with jk')
 map('i', 'kk', '<Esc>', 'Exit Insert Mode with kk')
 
-
 -- Copilot
 map('n', '<leader>ua', '<cmd>CopilotChatToggle<cr>', 'Toggle Copilot Chat')
 
