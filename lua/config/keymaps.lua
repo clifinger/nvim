@@ -7,6 +7,12 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+-- To exit insert mode
+map('i', 'jj', '<Esc>', 'Exit Insert Mode with jj')
+map('i', 'jk', '<Esc>', 'Exit Insert Mode with jk')
+map('i', 'jk', '<Esc>', 'Exit Insert Mode with kk')
+
+
 -- Copilot
 map('n', '<leader>ua', '<cmd>CopilotChatToggle<cr>', 'Toggle Copilot Chat')
 
