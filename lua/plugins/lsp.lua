@@ -137,26 +137,41 @@ return {
       capabilities = cmp_blink.get_lsp_capabilities(capabilities)
     end
 
+    -- SINGLE, AUTHORITATIVE SETUP FOR LUA_LS
+    require('lspconfig').lua_ls.setup {
+      capabilities = capabilities, -- Pass your global capabilities
+      on_init = function(client)
+        local folder_path = client.workspace_folders and client.workspace_folders[1] and client.workspace_folders[1].name
+        if folder_path and (vim.loop.fs_stat(folder_path .. '/.luarc.json') or vim.loop.fs_stat(folder_path .. '/.luarc.jsonc')) then
+          -- If a local .luarc.json exists, lua-language-server will prioritize it.
+          -- We return here to avoid overriding project-specific settings with our global defaults.
+          return
+        end
+
+        -- If no .luarc.json, apply these global/default settings for lua-ls
+        local default_lua_settings = {
+          runtime = { version = 'LuaJIT' },
+          workspace = {
+            checkThirdParty = false,
+            library = vim.api.nvim_get_runtime_file('', true), -- Comprehensive library path
+          },
+          diagnostics = { globals = { 'vim', 'use', 'Snacks' } }, -- Ensure all your globals are listed
+          codeLens = { enable = true },
+          completion = { callSnippet = 'Replace' },
+          doc = { privateName = { '^_' } },
+          hint = { enable = true, setType = false, paramType = true, paramName = 'Disable', semicolon = 'Disable', arrayIndex = 'Disable' },
+        }
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua or {}, default_lua_settings)
+      end,
+      settings = {
+        Lua = {},
+      },
+    }
+
     local servers = {
       bashls = {},
       marksman = {},
       elixirls = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            runtime = { version = 'LuaJIT' },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                '${3rd}/luv/library',
-                vim.api.nvim_get_runtime_file('', true),
-              },
-            },
-            diagnostics = { disable = { 'missing-fields' }, globals = { 'vim', 'use', 'Snacks' } },
-            format = { enable = false },
-          },
-        },
-      },
       tsserver = {
         enabled = false,
       },
@@ -292,13 +307,14 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {},
+      automatic_enable = true,
       automatic_installation = false,
       handlers = {
         function(server_name)
-          if server_name == 'lua_ls' then
+          if server_name == 'tsserver' or server_name == 'ts_ls' then
             return
           end
-          if server_name == 'tsserver' or server_name == 'ts_ls' then
+          if server_name == 'lua_ls' then
             return
           end
 
@@ -365,9 +381,5 @@ return {
         end,
       },
     }
-
-    local lua_ls_config = servers.lua_ls or {}
-    lua_ls_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, lua_ls_config.capabilities or {})
-    require('lspconfig').lua_ls.setup(lua_ls_config)
   end,
 }

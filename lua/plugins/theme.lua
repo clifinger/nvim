@@ -4,25 +4,44 @@ return {
     'rose-pine/neovim',
     name = 'rose-pine',
     config = function()
-      require('rose-pine').setup {
+      local rp = require 'rose-pine'
+
+      local rose_pine_base_config = {
         dark_variant = 'moon',
-        disable_italics = true,
+        disable_italics = false,
         styles = {
           bold = true,
           italic = true,
-          transparency = false,
         },
       }
-      -- function to toggle dark and light mode by setting vim.o.background
-      local function toggle_dark_light()
-        if vim.o.background == 'dark' then
-          vim.o.background = 'light'
-        else
+
+      local function apply_theme_settings(is_target_dark)
+        local set_transparent = is_target_dark
+
+        rose_pine_base_config.transparent_background = set_transparent
+        rose_pine_base_config.styles.transparency = set_transparent
+
+        if is_target_dark then
           vim.o.background = 'dark'
+        else
+          vim.o.background = 'light'
+        end
+
+        rp.setup(rose_pine_base_config)
+        vim.cmd 'colorscheme rose-pine'
+      end
+
+      apply_theme_settings(vim.o.background == 'dark')
+
+      local function toggle_background_mode()
+        if vim.o.background == 'dark' then
+          apply_theme_settings(false)
+        else
+          apply_theme_settings(true)
         end
       end
-      vim.keymap.set('n', '<leader>tl', toggle_dark_light, { desc = 'Toggle dark/light mode' })
-      vim.cmd 'colorscheme rose-pine'
+
+      vim.keymap.set('n', '<leader>ut', toggle_background_mode, { desc = 'Toggle Rose-pine dark/light & transparency' })
     end,
   },
 }
