@@ -410,20 +410,24 @@ return {
       end,
       desc = 'Select Scratch Buffer',
     },
-    {
-      '<leader>bd',
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = 'Delete Buffer',
-    },
-    {
-      '<leader>bD',
-      function()
-        Snacks.bufdelete.all()
-      end,
-      desc = 'Delete All Other Buffers',
-    },
+{
+    '<leader>bd',
+    function()
+      local ok, err = pcall(Snacks.bufdelete)
+      if not ok then
+      end
+    end,
+    desc = 'Delete Buffer (Suppress Errors)',
+  },
+  {
+    '<leader>bD',
+    function()
+      local ok, err = pcall(Snacks.bufdelete.all)
+      if not ok then
+      end
+    end,
+    desc = 'Delete All Other Buffers (Suppress Errors)',
+  },
     {
       '<leader>cR',
       function()
