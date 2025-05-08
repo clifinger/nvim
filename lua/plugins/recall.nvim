@@ -1,0 +1,8 @@
+return {
+  "fnune/recall.nvim",
+  config = function()
+    require("recall").setup({})
+  end,
+  lazy = true,
+  event = "VeryLazy"
+}
