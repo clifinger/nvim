@@ -7,6 +7,15 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+vim.keymap.set('n', 'x', '"_x', opts)
+
+-- Stay in indent mode
+vim.keymap.set('v', '<', '<gv', opts)
+vim.keymap.set('v', '>', '>gv', opts)
+
+-- Keep last yanked when pasting
+vim.keymap.set('v', 'p', '"_dP', opts)
+
 -- To exit insert mode
 map('i', 'jj', '<Esc>', 'Exit Insert Mode with jj')
 map('i', 'jk', '<Esc>', 'Exit Insert Mode with jk')
