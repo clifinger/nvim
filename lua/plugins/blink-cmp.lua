@@ -41,7 +41,8 @@ return {
       },
 
       keymap = {
-        preset = 'enter',
+        preset = "enter",
+        ["<C-y>"] = { "select_and_accept" },
       },
       appearance = {
         nerd_font_variant = 'normal',
