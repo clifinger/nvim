@@ -28,13 +28,13 @@ return {
   },
   {
     -- Session's Auto-saving & write
-    { 'echasnovski/mini.sessions', version = false },
+    'echasnovski/mini.sessions',
+    version = false,
     config = function()
-      require('mini.sessions').setup({
-      autoread = true,
-      autowrite = true,
-    })
+      require('mini.sessions').setup {
+        autoread = true,
+        autowrite = true,
+      }
     end,
   },
-    
 }
