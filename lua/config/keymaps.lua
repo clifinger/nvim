@@ -34,7 +34,7 @@ map('n', '-', '<cmd>Oil --float<CR>', 'File Explorer: Open Parent Directory (Oil
 map('n', '<C-d>', '<C-d>zz', 'Navigate: Scroll Down Half Page (Center)')
 map('n', '<C-u>', '<C-u>zz', 'Navigate: Scroll Up Half Page (Center)')
 map('n', 'n', 'nzzzv', 'Navigate: Next Search Result (Center)')
-map('N', 'Nzzzv', 'Navigate: Previous Search Result (Center)')
+map('n', 'Nzzzv', 'Navigate: Previous Search Result (Center)')
 
 -- Window Management
 map('n', '<leader>v', '<C-w>v', 'Window: Split Vertically')
