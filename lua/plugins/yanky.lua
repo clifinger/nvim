@@ -1,23 +1,23 @@
 return {
   'gbprod/yanky.nvim',
-  dependencies = { "folke/snacks.nvim" },
+  dependencies = { 'folke/snacks.nvim' },
   opts = {
     ring = { storage = 'shada' },
     system_clipboard = {
-    sync_with_ring = false,
-    clipboard_register = nil,
-  },
+      sync_with_ring = false,
+      clipboard_register = nil,
+    },
   },
   keys = {
     {
-      "<leader>sp",
+      '<leader>sy',
       function()
-          Snacks.picker.yanky()
+        Snacks.picker.yanky()
       end,
-      mode = { "n", "x" },
-      desc = "Open Yank History",
+      mode = { 'n', 'x' },
+      desc = 'Open Yank History',
     },
-    { 'y', '<Plug>(YankyYank)', mode = { 'n', 'x' }, desc = 'Yank text' },
+    { 'y', '<Plug>(YankyYank)', mode = { 'n', 'x' }, desc = 'Yank ext' },
     { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' }, desc = 'Put yanked text after cursor' },
     { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put yanked text before cursor' },
     { 'gp', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' }, desc = 'Put yanked text after selection' },
