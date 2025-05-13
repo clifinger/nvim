@@ -4,6 +4,7 @@ return {
       { 'github/copilot.vim' },
       { 'nvim-lua/plenary.nvim', branch = 'master' },
   },
+  build = 'make tiktoken',
   branch = "main",
   cmd = "CopilotChat",
   opts = function()
