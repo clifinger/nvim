@@ -41,8 +41,8 @@ return {
       },
 
       keymap = {
-        preset = "enter",
-        ["<C-y>"] = { "select_and_accept" },
+        preset = 'enter',
+        ['<C-y>'] = { 'select_and_accept' },
       },
       appearance = {
         nerd_font_variant = 'normal',
@@ -55,7 +55,7 @@ return {
           auto_brackets = { enabled = true },
         },
       },
-      signature = { enabled = true },
+      signature = { enabled = false },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji', 'sql' },

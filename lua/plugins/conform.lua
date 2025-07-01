@@ -32,6 +32,10 @@ return {
         ['json'] = { 'biome-check' },
         ['css'] = { 'biome-check' },
         markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
+        yaml = { 'prettier' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        zig = { 'zig fmt' },
         ['markdown.mdx'] = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
       },
 

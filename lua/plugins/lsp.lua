@@ -280,6 +280,15 @@ return {
           variables = {},
         },
       },
+      zls = {},
+      yamlls = {
+        settings = {
+          yaml = {
+            schemas = require("schemastore").yaml.schemas(),
+            validate = true,
+          },
+        },
+      },
     }
 
     local ensure_installed_tools = {
@@ -296,6 +305,9 @@ return {
       'markdown-toc',
       'js-debug-adapter',
       'emmet-language-server',
+      'zls',
+      'yaml-language-server',
+      'shfmt',
     }
     local unique_tools = {}
     for _, tool in ipairs(ensure_installed_tools) do
