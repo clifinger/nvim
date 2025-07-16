@@ -29,7 +29,12 @@ require('lazy').setup {
     { import = 'plugins' },
   },
   install = { colorscheme = { 'kanagawa' } },
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    auttocheck = true,
+    notify = false,
+    frequency = 3600,
+  },
 }
 
 require 'config.keymaps'
