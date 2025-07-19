@@ -20,6 +20,18 @@ return {
             return #diag > 0
           end,
         },
+        ['biome'] = {
+          command = 'biome',
+          args = {
+            'check',
+            '--formatter-enabled=true',
+            '--linter-enabled=false',
+            '--organize-imports-enabled=true',
+            '--write',
+            '--stdin-file-path',
+            '$FILENAME',
+          },
+        },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
