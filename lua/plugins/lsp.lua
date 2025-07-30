@@ -170,6 +170,7 @@ return {
 
     local servers = {
       bashls = {},
+      zls = {},
       marksman = {},
       elixirls = {},
       tsserver = {
@@ -284,7 +285,7 @@ return {
       yamlls = {
         settings = {
           yaml = {
-            schemas = require("schemastore").yaml.schemas(),
+            schemas = require('schemastore').yaml.schemas(),
             validate = true,
           },
         },

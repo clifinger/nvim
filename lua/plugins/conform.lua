@@ -12,14 +12,6 @@ return {
             end
           end,
         },
-        ['markdownlint-cli2'] = {
-          condition = function(_, ctx)
-            local diag = vim.tbl_filter(function(d)
-              return d.source == 'markdownlint'
-            end, vim.diagnostic.get(ctx.buf))
-            return #diag > 0
-          end,
-        },
         ['biome'] = {
           command = 'biome',
           args = {
@@ -43,8 +35,8 @@ return {
         ['typescriptreact'] = { 'biome' },
         ['json'] = { 'biome-check' },
         ['css'] = { 'biome-check' },
-        markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
-        yaml = { 'prettier' },
+        markdown = { 'markdownlint-cli2', 'markdown-toc' },
+        yaml = { 'yamlfix' },
         sh = { 'shfmt' },
         bash = { 'shfmt' },
         zig = { 'zig fmt' },
