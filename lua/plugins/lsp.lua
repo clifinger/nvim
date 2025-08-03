@@ -169,6 +169,8 @@ return {
     }
 
     local servers = {
+      pyright = {},
+      ruff_lsp = {},
       bashls = {},
       zls = {},
       marksman = {},
@@ -309,6 +311,10 @@ return {
       'zls',
       'yaml-language-server',
       'shfmt',
+      'pyright',
+      'ruff',
+      'black',
+      'isort',
     }
     local unique_tools = {}
     for _, tool in ipairs(ensure_installed_tools) do

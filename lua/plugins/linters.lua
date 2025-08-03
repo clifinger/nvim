@@ -10,6 +10,7 @@ return {
       elixir = { 'credo' },
       typescript = { 'biomejs' },
       javascript = { 'biomejs' },
+      python = { 'ruff' },
     }
 
     -- Autocommand to run linting on specific events

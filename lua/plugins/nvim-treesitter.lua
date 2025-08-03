@@ -21,6 +21,7 @@ return {
         'zig',
         'yaml',
         'bash',
+        'python',
       },
       auto_install = true,
       sync_install = false,
